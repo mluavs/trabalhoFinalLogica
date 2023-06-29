@@ -20,12 +20,12 @@ let refrigerante = new Lanche("Refrigerante", 105, 1.00);
 // agora que eu tenho os lanches determinados, com nome, códigos e valores, eu posso começar a pensar em como receber entradas do usuário e como vincular o que o usuário pedir aos dados que eu já tenho. a função calcularTotal() tá fazendo várias coisas e isso talvez seja um problema, mas vamo lá
 
 function calcularTotal() {
-  prompt.get(['number'], function (err, result) { // isso aqui é sintaxe, tá vindo das instruções da biblio desse prompt 
-    const number = parseInt(result.number); //parseInt aqui ta garantindo que eu vou ter um número como resultado dessa entrada.
+  prompt.get(['codigo'], function (err, result) { // isso aqui é sintaxe, tá vindo das instruções da biblio desse prompt 
+    const codigo = parseInt(result.codigo); //parseInt aqui ta garantindo que eu vou ter um número como resultado dessa entrada.
 
 // essa é a minha condição mais importante, é ela que encerra o cálculo se o número digitado no prompt for 999
-    if (number === 999) {
-      console.log('=== Cálculo total ===');
+    if (codigo === 999) {
+      console.log('============== Cálculo total ==============');
       console.log('Lanche\t\tCódigo\tValor\tQuantidade\tSubtotal');
       console.log('--------------------------------------------');
       for (const listaLanches of listaFinalLanches) {
@@ -37,14 +37,14 @@ function calcularTotal() {
     }
 
 // essa condição verifica se o usuário está digitando um número entre 100 e 105, se ele digitar algo diferente aparece uma mensagem de erro. e a função reinicia com o primeiro prompt que pede novamente o código
-    if (number < 100 || number > 105) {
+    if (codigo < 100 || codigo > 105) {
         console.log('Erro: número inválido! Digite um número entre 100 e 105');
         calcularTotal();
         return;
       }
 
 // essa condição impede a passação de pano pra um usuário que digitar letra. o algortimo reconhece que os caracteres digitados não são um número e pede ao usuário que digite um número.
-      if (isNaN(number)) {
+      if (isNaN(codigo)) {
           console.log('Isso não é um número. Por favor digite um número');
           calcularTotal();
           return;
@@ -52,7 +52,7 @@ function calcularTotal() {
 
 // aqui eu tenho uma estrutura switch 
     let lanche;
-    switch (number) {
+    switch (codigo) {
       case 100:
         lanche = cachorroQuente;
         break;
